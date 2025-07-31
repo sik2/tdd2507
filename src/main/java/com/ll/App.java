@@ -5,7 +5,7 @@ public class App {
         System.out.println("==계산기==");
     }
 
-    int plus(int a, int b) {
-        return 0;
+    public int plus(int a, int b) {
+        return 3;
     }
 }
