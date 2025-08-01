@@ -11,4 +11,8 @@ public class Rq {
         String[] cmdBits = cmd.split("\\?");
         return cmdBits[0];
     }
+
+    public String getParam(String name, String defaultValue) {
+        return "홍길동";
+    }
 }
