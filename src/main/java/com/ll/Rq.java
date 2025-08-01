@@ -36,6 +36,10 @@ public class Rq {
             return defaultValue;
         }
 
-        return Integer.parseInt(value);
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 }
