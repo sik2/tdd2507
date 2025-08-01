@@ -1,5 +1,8 @@
 package com.ll;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Rq {
     private final String cmd;
 
@@ -16,6 +19,8 @@ public class Rq {
         //"등록?이름=홍길동&고향=남원" -> "등록", "이름=홍길동&고향=남원"
         String queryString = cmd.split("\\?", 2)[1];
 
+        Map<String, String> params = new HashMap<>();
+
         //이름=홍길동&고향=남원
         String[] queryStringBits = queryString.split("&");
 
@@ -27,11 +32,9 @@ public class Rq {
             String paramName = paramBits[0];
             String paramValue = paramBits[1];
 
-            if (name.equals(paramName)) {
-                return paramValue;
-            }
+            params.put(paramName, paramValue);
         }
 
-        return defaultValue;
+        return params.getOrDefault(name, defaultValue);
     }
 }
