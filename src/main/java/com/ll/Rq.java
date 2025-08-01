@@ -28,4 +28,14 @@ public class Rq {
     public String getParam(String name, String defaultValue) {
         return params.getOrDefault(name, defaultValue);
     }
+
+    public int getParamAsInt(String name, int defaultValue) {
+        String value = getParam(name, "");
+
+        if (value.isBlank()) {
+            return defaultValue;
+        }
+
+        return Integer.parseInt(value);
+    }
 }
