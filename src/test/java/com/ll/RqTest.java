@@ -25,4 +25,14 @@ public class RqTest {
 
         assertEquals("삭제", actionName);
     }
+
+    @Test
+    @DisplayName("\"등록?이름=홍길동\" : rq.getActionName()")
+    void t3() {
+        Rq rq = new Rq("등록?이름=홍길동");
+
+        String paramValue = rq.getParam("이름", "");
+
+        assertEquals("홍길동", paramValue);
+    }
 }
