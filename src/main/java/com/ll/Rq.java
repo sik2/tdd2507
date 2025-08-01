@@ -5,9 +5,23 @@ import java.util.Map;
 
 public class Rq {
     private final String cmd;
+    private final  Map<String, String> params;
 
     public Rq(String cmd) {
         this.cmd = cmd;
+
+        params  = new HashMap<>();
+        String queryString = cmd.split("\\?", 2)[1];
+
+        String[] queryStringBits = queryString.split("&");
+
+        for (String paramStr  : queryStringBits) {
+            String[] paramBits = paramStr.split("=", 2);
+            String paramName = paramBits[0];
+            String paramValue = paramBits[1];
+
+            params.put(paramName, paramValue);
+        }
     }
 
     public String getActionName() {
@@ -16,25 +30,6 @@ public class Rq {
     }
 
     public String getParam(String name, String defaultValue) {
-        //"등록?이름=홍길동&고향=남원" -> "등록", "이름=홍길동&고향=남원"
-        String queryString = cmd.split("\\?", 2)[1];
-
-        Map<String, String> params = new HashMap<>();
-
-        //이름=홍길동&고향=남원
-        String[] queryStringBits = queryString.split("&");
-
-        // [이름=홍길동, 고향=남원]
-        for (String paramStr  : queryStringBits) {
-            // "이름=홍길동" -> "이름", "홍길동"
-            // "고향=남원" -> "고향", "남원"
-            String[] paramBits = paramStr.split("=", 2);
-            String paramName = paramBits[0];
-            String paramValue = paramBits[1];
-
-            params.put(paramName, paramValue);
-        }
-
         return params.getOrDefault(name, defaultValue);
     }
 }
